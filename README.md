@@ -1,4 +1,4 @@
-Nearly empty java project with a failing test!
+Nearly empty java project with a failing test! THIS IS NOW A BOOT PROJECT
 ===
 
 This has been created using gradle; to run the tests, just execute:
