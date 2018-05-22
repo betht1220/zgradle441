@@ -1,0 +1,77 @@
+/**Step#1**/
+buildscript {
+	ext {
+		springBootVersion = '2.0.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
+/**Step#2*/
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+/**Step#3 */
+repositories {
+	mavenCentral()
+}
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+/*Step#4 - to fix error in Step#3*
+1. Add Application.java
+	public class Application {
+		public static void main (String[] args){
+			System.out.println("Hello World: Execution failed for task ':bootJar'.");
+		}
+	}
+
+2. comment out @Test in FailingTest.java
+*/
+
+/*Step#5 - put @SpringBootApplication and SpringApplication.run to make boot loads in jetty
+           also put DemoApplication in package "com.beth.hello", NEVER PUT IT IN default package
+           this will cause boot to have problem scanning the root, and it will load JDBC, ???
+
+package com.beth.hello;
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+}           
+*/
+
+group = 'com.beth'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+
+/*
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+*/
